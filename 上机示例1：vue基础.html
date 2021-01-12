@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>vue基础</title>
+</head>
+<body>
+	<!-- 
+	为什么要学习vue？
+	企业需求。市场需求。提高工作效率。
+	解决之前前端的复杂dom的操作。
+	
+	框架和库的区别：
+	框架：是一套完整的解决方案。封装的是与业务无关的代码。一旦切换框架，
+	几乎代码重写。例如Vue更换React。
+	库：封装好的js代码。切换比较简单。例如：jQuery更换Zepto。
+	
+	Vue的使用场景：
+	如果项目中还在使用jQuery频繁的操作dom元素的话，可以尝试更换成Vue来
+	解决Dom操作。
+	如果项目重复内容较多，也可以使用Vue来解决，封装成组件提高代码的复用。
+	
+	Vue简介
+	Vue.js是目前最流行的、国产的前端MVVM框架作者是尤雨溪(华人)
+	比较稳定的版本是2.6.10，目前最新3.0
+	
+	MVC和MVVM的区别
+	MVC
+	MVVM 
+	-->
+	
+	<!-- jQuery与Vue方式对比 -->
+	<!-- <div id="box1">
+		
+	</div>
+	<script src="js/jquery.js"></script>
+	<script>
+		let showBtn=true;
+		if(showBtn){
+			let btn=$("<button>click me</button>");
+			btn.on("click",function(){
+				console.log("点击了");
+			})
+			$("#box1").append(btn);
+		}
+	</script> -->
+	
+	<script src="js/vue.js"></script>
+	<div id="box2">
+		<button @click="clickme" v-show="showBtn">click me</button>
+	</div>
+	<script>
+		let vm=new Vue({
+			el:"#box2",
+			data:{
+				showBtn:true
+			},
+			methods:{
+				clickme(){
+					console.log("点击了");
+				}
+				
+			}
+		})
+	</script>
+	
+	
+	
+</body>
+</html>
