@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>v-model双向绑定</title>
+</head>
+<body>
+	<script src="js/vue.js"></script>
+	<div id="box">
+		<!-- 双向绑定 -->
+		<input type="text" v-model="msg"/>
+		{{msg}}<br/>
+		<input type="radio" value="男" v-model="user.sex"/>男
+		<input type="radio" value="女" v-model="user.sex"/>女
+		<!-- 
+		v-model 的值相同，在"底层"相当于把他们归为一组，当点击哪个
+		单选时，该v-model的值就是value的值，当点击的是男选项时，
+		也就是user.sex="男"，同时更新data里的sex。 
+		-->
+		<br/>{{user.sex}}
+	</div>
+</body>
+	<script>
+		let vm=new Vue({
+			el:"#box",
+			data:{
+				msg:"hello",
+				user:{
+					sex:"女"
+				}
+			}
+		})
+	</script>
+</html>

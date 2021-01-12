@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>插值表达式的使用</title>
+	<!-- 语法：{{表达式}} -->
+</head>
+<body>
+	<!-- 第一步引入vue.js -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- 第二步：创建view  视图层：显示数据 -->
+	<div id="box">
+		<!-- 第四步：使用数据 -->
+		<!-- {{js}} -->
+		<h1>{{temp}}</h1>
+		<h2>{{5}}</h2>
+		<p>{{"zhangsan"}}</p>
+		<p>{{1+1}}</p>
+		<p>{{"zhangsan"+"你好"+temp}}</p>
+		<p>{{1>0?"为真的情况":"为假的情况"}}</p>
+	</div>
+	<script>
+		//第三步：创建model层，实例化Vue对象
+		let vm=new Vue({
+			el:"#box",
+			//变量数据
+			data:{
+				temp:"张三123"
+			}
+		})
+	</script>
+</body>
+</html>

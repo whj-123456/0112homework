@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>指令</title>
+</head>
+<body>
+	<!--
+	指令（Directive) 是特殊的带有 v- 前缀的特性
+	
+	v-text和v-html
+	v-html:更新元素的innerHTML
+	v-text:更新元素的textContent,不解析html
+	
+	v-if v-else-if v-else 
+	
+	控制元素显示隐藏。当满足条件时，渲染到页面中，
+	当不满足时就不渲染。
+	v-if: 当为true时，显示
+	v-else: 当if不成立时，显示
+	v-else-if:多条件判断
+	
+	v-show
+	控制显示和隐藏
+	v-show : 设置display来控制显示和隐藏
+	
+	与v-if的区别？
+	v-if:当满足条件时，渲染到页面中，当不满足时就不渲染。
+	如果页面需要频繁控制显示和隐藏的使用v-show。如果只是
+	一次性控制显示和隐藏使用v-if。
+	
+	v-on 和 v-on 修饰符
+	用于事件绑定v-on:事件名=事件函数名
+	缩写：@事件名=事件函数名 
+	-->
+	
+	<!--
+	.stop 调用event.stopPropagation()
+	.prevent 调用event.preventDefault()
+	.self 只当事件是从侦听器绑定的元素本身触发时才触发回调
+	-->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<div id="box">
+		<div class="parentdiv" @click.self="parentFn">
+			parentdiv
+			<div class="childdiv" @click="childFn">
+				childdiv
+			</div>
+			<!-- 解决方案 -->
+			<!-- <div class="childdiv" @click.stop="childFn">
+				childdiv
+			</div> -->
+		</div>
+		<!-- <input type="text" @keyup.enter="enter" @keydown.up="top()"/> -->
+		<input type="text" @keyup.enter="enter" @keydown="top()"/>
+		<!-- 
+		keyup 按键抬起触发，不管是什么按键
+		keydown 按键按下触发，不管是什么按键
+		打点 .enter 当按的是enter(回车)时才触发
+		打点 .up 当按的是up(方向键上键)时才触发 
+		当然，键盘上的所有按键都可以进行打点来单独控制
+		-->
+	</div>
+</body>
+	<script>
+		let vm=new Vue({
+			el:"#box",
+			data:{},
+			methods:{
+				parentFn(){console.log("parentFn")},
+				childFn(){console.log("childFn")},
+				enter(){console.log("用户敲回车了")},
+				top(){console.log("按了上键")}
+			}
+		})
+	</script>
+</html>

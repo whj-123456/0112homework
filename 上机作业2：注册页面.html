@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <style>
+        #box {
+            width: 500px;
+            height: 440px;
+            border: 2px solid #70db70;
+        }
+        
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<script src="js/vue.js"></script>
+
+<body>
+    <div id="box">
+        <fieldset>
+            <legend>用户注册</legend>
+            <p>
+                <label>用户名：<input type="text" v-model="user[0]"/></label>
+            </p>
+            <p>
+                <label>密码框：<input type="password" v-model="user[1]"/></label>
+            </p>
+            <p>
+                性别：
+                <label><input type="radio" value="男" v-model="sex_h"/>男</label>
+                <label><input type="radio" value="女" v-model="sex_h"/>女</label>
+            </p>
+            <p>
+                爱好(多选按钮)：
+                <label><input type="checkbox" v-model="bol[0]" v-text="arr[0]"/>吃</label>
+                <label><input type="checkbox" v-model="bol[1]" v-text="arr[1]"/>玩</label>
+                <label><input type="checkbox" v-model="bol[2]" v-text="arr[2]"/>睡觉</label>
+                <label><input type="checkbox" v-model="bol[3]" v-text="arr[3]"/>唱歌</label>
+            </p>
+            <p>
+                <button type="button" @click="submit">提交</button>
+                <button type="button" v-on:click="reset">重置</button>
+            </p>
+        </fieldset>
+        <div v-bind:class="{hide:flag}">
+            <p>填写表单内容如下：</p>
+            <p>用户名：<span v-bind:class="{hide:flag}">{{uname}}</span></p>
+            <p>密码：<span v-bind:class="{hide:flag}">{{pwd}}</span></p>
+            <p>性别：<span v-bind:class="{hide:flag}">{{sex}}</span></p>
+            <p>爱好(多选)：<span v-bind:class="{hide:flag}">{{result}}</span></p>
+        </div>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#box",
+        data: {
+            flag: true,
+            user: [],
+            uname: "",
+            pwd: "",
+            sex_h: "男",
+            sex: "",
+            bol: [],
+            arr: ["eat", "play", "sleep", "song"],
+            hobby: ["吃", "玩", "睡觉", "唱歌"],
+            result: []
+        },
+        methods: {
+            submit() {
+                this.result = [];
+                this.bol.forEach((item, index) => {
+                    if (item) {
+                        this.result.push(this.arr[index]);
+                    }
+                })
+                this.sex = this.sex_h;
+                this.uname = this.user[0];
+                this.pwd = this.user[1];
+                this.flag = false;
+            },
+            reset: function() {
+                this.flag = true;
+                this.user = [];
+                this.sex_h = "男";
+                this.bol = [];
+                this.result = [];
+            }
+        }
+    })
+</script>
+
+</html>

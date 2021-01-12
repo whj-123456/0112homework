@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hello倒序</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        {{temp}}
+        <button type="button" @click="fn(temp)">倒序</button>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#box",
+        data: {
+            temp: "hello"
+        },
+        methods: {
+            fn(str) {
+                this.temp = str.split("").reverse().join("");
+            }
+        }
+    })
+</script>
+
+</html>
