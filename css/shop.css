@@ -1,0 +1,34 @@
+table{
+	border-collapse: collapse;
+	border-color:#40acc8;
+	width:400px;
+	text-align: center;
+	color:#232727;
+}
+table thead{
+	background-color:#cfeef1;
+	color:#536978;
+}
+table tbody tr:nth-of-type(even){
+	background-color:#efefef;
+}
+table tbody button{
+	/* background-color:white; */
+	color:#232727;
+	border-radius: 3px;
+	border:1px solid #bebebe;
+	outline:none;
+	height:24px;
+	width:50px;
+	line-height: 24px;
+}
+table tbody button.count{
+	width:24px;
+}
+table th,table td{
+	border:none;
+	line-height: 40px;
+}
+table tfoot{
+	text-align: left;
+}

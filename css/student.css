@@ -1,0 +1,48 @@
+
+#box fieldset{
+	border-color:#40acc8;
+	/* width:600px; */
+	margin-bottom:20px;
+}
+#box div{
+	margin-bottom:10px;
+}
+#box div span{
+	color:red;
+}
+fieldset button{
+	background-color:#40acc8;
+	border:none;
+	outline:none;
+	color:white;
+	width:100px;
+	height:30px;
+	border-radius: 5px;
+}
+table{
+	border-collapse: collapse;
+	border-color:#40acc8;
+	width:100%; 
+	text-align: center;
+	color:#737170;
+}
+table thead{
+	background-color:#40acc8;
+	color:white;
+}
+table tbody tr:nth-of-type(even){
+	background-color:#efefef;
+}
+table tbody button{
+	background-color:#40acc8;
+	color:white;
+	border-radius: 3px;
+	border:none;
+	height:24px;
+	width:40px;
+	line-height: 24px;
+}
+table th,table td{
+	border:none;
+	line-height: 30px;
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>学生信息录入系统</title>
+	<script src="js/vue.js"></script>
+	<link rel="stylesheet" href="css/student.css" type="text/css"/>
+	<style>
+		[v-cloak]{
+			display:none;
+		}
+	</style>
+</head>
+	
+<body>
+	<div id="box" v-cloak>
+		<fieldset>
+			<legend>学生信息录入系统</legend>
+			<div>
+				<label>姓名：<input type="text" v-model="msg.uname"/></label>
+				<!-- <span v-show="err.unameErr">4-16位(字母，数字，下划线)</span> -->
+				<span v-show="err.unameErr">4-16位(字母，数字，下划线)</span>
+			</div>
+			<div>
+				<label>年龄：<input type="text" v-model="msg.uage"/></label>
+				<span v-show="err.uageErr">0-150</span>
+			</div>
+			<div>
+				性别：
+				<select v-model="msg.usex">
+					<option>男</option>
+					<option>女</option>
+				</select>
+				<span v-show="err.usexErr"></span>
+			</div>
+			<div>
+				<label>手机：<input type="text" placeholder="请输入手机号码" v-model="msg.uphone"/></label>
+				<span v-show="err.uphoneErr">11位(1开头)</span>
+			</div>
+			<button type="button" v-on:click="create()">创建新用户</button>
+		</fieldset>
+		<table class="list" border=1>
+			<thead>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>手机</th>
+				<th>删除</th>
+			</thead>
+			<tbody>
+				<tr v-for="(item,index) in arr">
+					<td>{{item.uname}}</td>
+					<td>{{item.uage}}</td>
+					<td>{{item.usex}}</td>
+					<td>{{item.uphone}}</td>
+					<td><button type="button" @click="del(index)">删除</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+	<script>
+		let vm=new Vue({
+			el:"#box",
+			data:{
+				btnCli:false,
+				arr:[],
+				msg_start:["","","男",""],
+				msg:{
+					uname:"",
+					//[{name:'uname',value:"1", reg://, hasError:false},
+					uage:"",
+					usex:"男",
+					uphone:""
+				},
+				err:{
+					unameErr:false,
+					uageErr:false,
+					usexErr:false,
+					uphoneErr:false
+				}
+			},
+			methods:{
+				create(){
+					let reg=[/^[a-zA-Z\d\_]{4,16}$/,/^[1-9]$|^\d\d$|^1[0-4]\d$|^150$/,/^男$|^女$/,/^1[\d]{10}$/];
+					let j=0,k=0;
+					let flag=true;
+					let temp=[];
+					let msg=JSON.parse(JSON.stringify(this.msg));
+					let err=JSON.parse(JSON.stringify(this.err));
+					for(let i in msg){
+						temp[j]=!reg[j].test(msg[i])
+						if(temp[j]){
+							flag=false;
+						}
+						j++;
+					}
+					for(let i in err){
+						err[i]=temp[k];
+						k++;
+					}
+					this.msg=msg;
+					this.err=err;
+					if(flag){
+						this.arr.push(this.msg);
+						let msg=JSON.parse(JSON.stringify(this.msg));
+						let s=0;
+						for(let i in msg){
+							msg[i]=this.msg_start[s];
+							s++;
+						}
+						this.msg=msg;
+					}
+				},
+				del(index){
+					this.arr.splice(index,1);
+				}
+			}
+		})
+	</script>
+</html>
+
+
+
+
+
+
+
+
+<!--
+<body>
+	<div id="box">
+		<fieldset>
+			<legend>学生信息录入系统</legend>
+			<div>
+				<label>姓名：<input type="text" v-model="msg.uname"/></label>
+				<!-- <span v-show="err.unameErr">4-16位(字母，数字，下划线)</span> 
+				<span v-show="err.unameErr">4-16位(字母，数字，下划线)</span>
+			</div>
+			<div>
+				<label>年龄：<input type="text" v-model="msg.uage"/></label>
+				<span v-show="err.uageErr">0-150</span>
+			</div>
+			<div>
+				性别：
+				<select v-model="msg.usex">
+					<option>男</option>
+					<option>女</option>
+				</select>
+				<span v-show="err.usexErr"></span>
+			</div>
+			<div>
+				<label>手机：<input type="text" placeholder="请输入手机号码" v-model="msg.uphone"/></label>
+				<span v-show="err.uphoneErr">11位(1开头)</span>
+			</div>
+			<button type="button" v-on:click="create()">创建新用户</button>
+		</fieldset>
+		<table class="list" border=1>
+			<thead>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>手机</th>
+				<th>删除</th>
+			</thead>
+			<tbody>
+				<tr v-for="(item,index) in arr">
+					<td>{{item.uname}}</td>
+					<td>{{item.uage}}</td>
+					<td>{{item.usex}}</td>
+					<td>{{item.uphone}}</td>
+					<td><button type="button" @click="del(index)">删除</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+	<script>
+		let vm=new Vue({
+			el:"#box",
+			data:{
+				btnCli:false,
+				arr:[],
+				msg:{
+					uname:"1",
+					uage:"2",
+					usex:"男",
+					uphone:"13412345678"
+				},
+				err:{
+					unameErr:false,
+					uageErr:false,
+					usexErr:false,
+					uphoneErr:false
+				}
+			},
+			methods:{
+				create(){
+					let reg=[/^[a-zA-Z\d\_]{4,16}$/,/^[1-9]$|^\d\d$|^1[0-4]\d$|^150$/,/^男$|^女$/,/^1[\d]{10}$/];
+					let j=0,k=0;
+					let flag=true;
+					let temp=[];
+					let msg=JSON.parse(JSON.stringify(this.msg));
+					let err=JSON.parse(JSON.stringify(this.err));
+					for(let i in msg){
+						temp[j]=!reg[j].test(msg[i])
+						if(temp[j]){
+							flag=false;
+						}
+						j++;
+					}
+					for(let i in err){
+						err[i]=temp[k];
+						console.log(err[i])
+						k++;
+					}
+					this.msg=msg;
+					this.err=err;
+					console.log("flag",flag);
+					if(flag){
+						this.arr.push(this.msg);
+					}
+				},
+				del(index){
+					this.arr.splice(index,1);
+				}
+			}
+		})
+	</script>
+-->
